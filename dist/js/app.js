@@ -3149,13 +3149,6 @@
             headerList.classList.toggle("_active-menu");
         }
     }));
-    let runLine = document.querySelector(".page__runline");
-    let script_text = runLine.innerHTML;
-    function runStroke() {
-        script_text = script_text[script_text.length - 1] + script_text.substring(0, script_text.length - 1);
-        runLine.innerHTML = script_text;
-    }
-    setInterval(runStroke, 100);
     window["FLS"] = true;
     isWebp();
 })();

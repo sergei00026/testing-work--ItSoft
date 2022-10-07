@@ -311,6 +311,42 @@ h6 {
   text-transform: uppercase;
   white-space: nowrap;
   color: #590d56;
+  position: relative;
+  -webkit-transition: all 0.9s linear 0s;
+  -o-transition: all 0.9s linear 0s;
+  transition: all 0.9s linear 0s;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.page__runline_text1 {
+  position: relative;
+  -webkit-animation: go1 50s infinite linear;
+          animation: go1 50s infinite linear;
+}
+
+@-webkit-keyframes go1 {
+  0% {
+    left: 0%;
+  }
+
+  100% {
+    left: 100%;
+  }
+}
+
+@keyframes go1 {
+  0% {
+    left: 0%;
+  }
+
+  100% {
+    left: 100%;
+  }
 }
 
 .main-page {

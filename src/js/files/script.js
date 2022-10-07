@@ -15,7 +15,7 @@ document.addEventListener("click", function (e) {
 		headerList.classList.toggle('_active-menu')
 	}
 });
-
+/*
 //run-line
 let runLine = document.querySelector('.page__runline');
 let text = runLine.innerHTML;
@@ -24,4 +24,6 @@ function runStroke() {
 	runLine.innerHTML = text;
 
 }
-setInterval(runStroke, 100);
+setInterval(runStroke, 1000);
+
+*/
