@@ -1,0 +1,143 @@
+//====================================================================================================
+.header {
+	// .header__container
+	&__container {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		min-height: 101px;
+		gap: 15px;
+	}
+	&__box {
+		display: flex;
+		align-items: center;
+		@include adaptiveValue("gap", 46, 10);
+	}
+	// .header__logo
+	&__logo {
+		position: relative;
+		z-index: 21;
+		img {
+			max-width: 100%;
+		}
+	}
+	// .header__search
+	&__search {
+		font-size: 44px;
+		color: #47093e;
+		@media (max-width: $mobileSmall) {
+			i {
+				font-size: 22px;
+				vertical-align: middle;
+				position: relative;
+				bottom: 2px;
+			}
+		}
+	}
+	// .header__location
+	&__location {
+		@media (max-width: $mobileSmall) {
+			img {
+				width: 22px;
+			}
+		}
+	}
+}
+
+.menu {
+	// .menu__body
+	&__body {
+		transition: all 0.3s ease 0s;
+		padding-top: 140px;
+		padding-bottom: 140px;
+		position: fixed;
+		width: 100%;
+		top: 0px;
+		left: -100%;
+		background: #fff url("@img/header/lines.svg") center/cover no-repeat;
+		z-index: 20;
+		._active-menu & {
+			left: 0;
+		}
+	}
+	// .menu__list
+	&__list {
+		display: flex;
+		flex-direction: column;
+		font-family: "Merriweather";
+		font-weight: 700;
+		font-size: 16px;
+		line-height: 100%;
+		color: #000000;
+		@include adaptiveValue("gap", 90, 30);
+		@include adaptiveValue("padding-left", 150, 20);
+	}
+	// .menu__item
+	&__item {
+		&:first-child {
+			color: #771373;
+		}
+	}
+	// .menu__link
+	&__link {
+	}
+	// .menu__icon
+	&__icon {
+	}
+}
+
+//====================================================================================================
+
+//Burger
+
+.icon-menu {
+	display: block;
+	position: relative;
+	width: 66px;
+	height: rem(41);
+	cursor: pointer;
+	z-index: 22;
+	@media (max-width: $mobileSmall) {
+		width: 44px;
+		height: 30px;
+		span {
+			max-width: 100%;
+		}
+	}
+	span,
+	&::before,
+	&::after {
+		content: "";
+		transition: all 0.3s ease 0s;
+		right: 0;
+		position: absolute;
+		width: 100%;
+		height: 12px;
+		background: url("../img/header/burger-line.svg") center no-repeat;
+	}
+	&::before {
+		top: 0;
+	}
+	&::after {
+		bottom: 0;
+	}
+	span {
+		top: calc(50% - 5px);
+	}
+	.menu-open & {
+		span {
+			width: 0;
+		}
+		&::before,
+		&::after {
+		}
+		&::before {
+			top: calc(50% - 10px);
+			transform: rotate(-45deg);
+		}
+		&::after {
+			bottom: calc(50% - rem(1));
+			transform: rotate(45deg);
+		}
+	}
+}

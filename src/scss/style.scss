@@ -1,0 +1,320 @@
+@use "sass:math";
+
+// Подключение миксинов
+@import "base/mixins";
+
+// Подключение шрифтов ===================================================================================================
+//&display=swap - добавить при подключении через плагин
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,regular&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Merriweather:700&display=swap");
+
+// Подключить если есть локальные файлы шрифтов
+//@import "fonts/fonts";
+
+// Подключение иконочных шрифтов ===================================================================================================
+// Подключить если есть файл иконочного шрифта
+//@import "fonts/icons";
+
+// Шрифт по умолчанию ====================================================================================================
+$fontFamily: "Roboto";
+$fontSize: rem(16); // где 14(px) - размер шрифта по умолчанию из макета
+
+// Основные цвета
+$mainColor: #000; // Цвет шрифта по умолчанию
+
+// Настройки адаптивной сетки ===================================================================================================
+// Минимальная ширина страницы
+$minWidth: 320;
+// Ширина полотна (макета)
+$maxWidth: 1440;
+// Ширина ограничивающего контейнера (0 = нет ограничения)
+$maxWidthContainer: 1140;
+// Общий отступ у контейнера
+// (30 = по 15px слева и справа, 0 = нет отступа)
+$containerPadding: 30;
+
+// Ширина срабатывания первого брейкпоинта
+$containerWidth: $maxWidthContainer + $containerPadding;
+
+// Брейк-поинты
+$pc: em($containerWidth); // ПК, ноутбуки, некоторые планшеты в горизонтальном положении
+$tablet: em(991.98); // Планшеты, некоторые телефоны в горизонтальном положении
+$mobile: em(767.98); // Телефоны L
+$mobileSmall: em(479.98); // Телефоны S
+
+// Тип адаптива:
+// 1 = отзывчивость (у контейнера нет брейкпоинтов),
+// 2 = по брейк-поинтам (контейнер меняет свою ширину по брейк-поинтам)
+$responsiveType: 1;
+
+// Обнуление ===================================================================================================
+@import "base/null";
+
+// Стили тега BODY ===================================================================================================
+
+body {
+	// Скролл заблокирован
+	.lock & {
+		overflow: hidden;
+		touch-action: none;
+	}
+	// Сайт загружен
+	.loaded & {
+	}
+}
+
+// Оболочка wrapper ===================================================================================================
+.wrapper {
+	min-height: 100%;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	// Прижимаем footer
+	> main {
+		flex: 1 1 auto;
+	}
+	// Фикс для слайдеров
+	> * {
+		min-width: 0;
+	}
+}
+// Ограничивающий контейнер ======================================================================================================================================================================================================================
+
+/*
+(i) Стили будут применяться ко 
+всем классам содержащим *__container
+Например header__container, main__container и т.д.
+Снипет (HTML): cnt
+*/
+@if ($responsiveType==1) {
+	// Отзывчивая
+	[class*="__container"] {
+		@if ($maxWidthContainer>0) {
+			max-width: rem($maxWidthContainer);
+			box-sizing: content-box;
+			margin: 0 auto;
+		}
+		@if ($containerPadding>0) {
+			padding: 0 rem(math.div($containerPadding, 2));
+		}
+	}
+} @else {
+	// По брейк-поинтам
+	[class*="__container"] {
+		margin: 0 auto;
+		@if ($maxWidthContainer>0) {
+			max-width: rem($maxWidthContainer);
+			box-sizing: content-box;
+		} @else {
+			@if ($containerPadding>0) {
+				padding: 0 rem(math.div($containerPadding, 2));
+			}
+		}
+		@media (max-width: $pc) {
+			max-width: rem(970);
+		}
+		@media (max-width: $tablet) {
+			max-width: rem(750);
+		}
+		@media (max-width: $mobile) {
+			max-width: none;
+			@if ($containerPadding>0 and $maxWidthContainer>0) {
+				padding: 0 rem(math.div($containerPadding, 2));
+			}
+		}
+	}
+}
+
+// Подключение базовых стилей, шаблонов (заготовок) и вспомогательных  классов
+// Для подключения/отключения конкретных стилей смотри base.scss
+@import "base";
+
+// Подключение стилей общих элементов проекта
+@import "common";
+
+// Подключение стилей отдельных блоков
+@import "header";
+@import "footer";
+
+// Подключение стилей отдельных страниц
+@import "home";
+.page {
+	// .page__main
+	&__main {
+	}
+	// .page__runline
+	&__runline {
+		font-weight: 300;
+		font-size: 48px;
+		line-height: math.div(56, 48);
+		text-transform: uppercase;
+		white-space: nowrap;
+		color: #590d56;
+	}
+}
+
+.main-page {
+	background: url("@img/main/bg.svg") center/cover no-repeat;
+	@media (max-width: $mobile) {
+		background: url("@img/main/bg.svg") right center / cover no-repeat;
+	}
+	@media (max-width: $mobileSmall) {
+		background: url("@img/main/bg-small.svg") center 40px / contain no-repeat;
+	}
+	// .main-page__container
+	&__container {
+	}
+	// .main-page__slider
+	&__slider {
+	}
+	// .main-page__wrapper
+	&__wrapper {
+	}
+	// .main-page__slide
+	&__slide {
+		position: relative;
+		@media (max-width: $mobile) {
+			display: flex;
+			flex-direction: column;
+		}
+	}
+	// .main-page__content
+	&__content {
+		max-width: 351px;
+		@media (min-width: $mobile) {
+			padding-top: 36px;
+			padding-bottom: 56px;
+		}
+	}
+	// .main-page__title
+	&__title {
+		font-family: "Merriweather";
+		font-weight: 700;
+		@include adaptiveValue("font-size", 55, 45);
+		line-height: 100%;
+		text-transform: lowercase;
+		&::first-letter {
+			text-transform: uppercase;
+		}
+		@media (min-width: $mobile) {
+			margin-bottom: 159px;
+		}
+	}
+	// .main-page__list
+	&__list {
+		display: flex;
+		flex-direction: column;
+		gap: 32px;
+		@media (max-width: em(820)) {
+			display: none;
+		}
+	}
+	// .main-page__item
+	&__item {
+		display: flex;
+		align-items: center;
+		gap: 30px;
+	}
+	// .main-page__link
+	&__link {
+		font-size: 18px;
+		line-height: math.div(21, 18);
+		text-decoration: underline !important;
+
+		color: #590d56;
+	}
+	// .main-page__img
+	&__img {
+		@include adaptiveValue("padding-top", 92, 0, 1440, 768);
+		position: absolute;
+		top: 0;
+		@include adaptiveValue("left", 216, 300);
+		@media (max-width: $mobile) {
+			position: relative;
+			left: 0;
+			img {
+				@media (max-width: $mobileSmall) {
+					content: url("../img/main/venarus_900-100 1.png");
+				}
+			}
+		}
+		img {
+			max-width: 100%;
+		}
+	}
+	&__box {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		@media (min-width: $mobile) {
+			transform: translate(40px, -20px);
+		}
+		@media (max-width: $mobile) and (min-width: $mobileSmall) {
+			transform: translate(-60px, -30px);
+		}
+		@media (max-width: $mobileSmall) {
+			transform: translateY(-30px);
+		}
+	}
+	&__naigation {
+		display: flex;
+		gap: 30px;
+		justify-content: center;
+		&:not(:last-child) {
+			margin-bottom: 31px;
+			@media (max-width: $mobileSmall) {
+				margin-bottom: 20px;
+			}
+		}
+		@media (max-width: $mobileSmall) {
+			& > button {
+				border: 1px solid #5b0e58 !important;
+				background: url("@img/main/arrow-purp.svg") center no-repeat !important;
+				width: 34.2px !important;
+				height: 34.2px !important;
+			}
+		}
+	}
+	// .main-page__prev
+	&__prev {
+		border-radius: 50%;
+		width: 68px !important;
+		height: 68px !important;
+		border: 1px solid #ffffff !important;
+		display: flex !important;
+		align-items: center;
+		justify-content: center;
+		background: url("@img/main/arrow.svg") center no-repeat;
+	}
+	// .main-page__next
+	&__next {
+		border-radius: 50%;
+		width: 68px !important;
+		height: 68px !important;
+		border: 1px solid #ffffff !important;
+		display: flex !important;
+		align-items: center;
+		justify-content: center;
+		background: url("@img/main/arrow.svg") center no-repeat;
+		transform: rotate(180deg);
+	}
+	&__button {
+		border: 1px solid #ffffff;
+		border-radius: 33.5px;
+		font-size: 18px;
+		line-height: math.div(21, 18);
+		text-align: center;
+		color: #ffffff;
+		align-items: center;
+		justify-content: center;
+		min-height: 67px;
+		padding: 5px 79px;
+		margin: 0 auto;
+		@media (max-width: $mobileSmall) {
+			border: 1px solid #5b0e58;
+			color: #5b0e58;
+			padding: 5px 25px;
+			min-height: 34px;
+		}
+	}
+}
