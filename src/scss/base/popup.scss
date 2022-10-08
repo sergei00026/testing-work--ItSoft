@@ -45,6 +45,7 @@ body::after {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	position: relative;
 }
 .popup__content {
 	visibility: hidden;
@@ -58,4 +59,14 @@ body::after {
 	.lock & {
 		visibility: visible;
 	}
+}
+.popup__text {
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+}
+.popup__close {
+	position: absolute;
+	top: 10px;
+	right: 20px;
 }
