@@ -27,3 +27,6 @@ function runStroke() {
 setInterval(runStroke, 1000);
 
 */
+tippy('[data-tippy-content]', {
+	content: "I'm a Tippy tooltip!",
+});

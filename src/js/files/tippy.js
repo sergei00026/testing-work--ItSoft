@@ -9,9 +9,11 @@ import tippy from 'tippy.js';
 // Подключение cтилей из src/scss/libs
 import "../../scss/libs/tippy.scss";
 // Подключение cтилей из node_modules
-//import 'tippy.js/dist/tippy.css';
+import 'tippy.js/dist/tippy.css';
 
 // Запускаем и добавляем в объект модулей
-flsModules.tippy = tippy('[data-tippy-content]', {
-
+flsModules.tippy = tippy('#typpy1', {
+	duration: 500,
+	arrow: true,
+	content: 'Венарус показан для терапии симптомовхронических заболеваний вен (устранения и облегчения симптомов).',
 });
