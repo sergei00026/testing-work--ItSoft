@@ -1,1 +1,1 @@
-https://sergei00026.github.io/testing-work--ItSoft/dist/
+https://sergei00026.github.io/venarus/dist/
